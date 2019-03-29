@@ -57,28 +57,9 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
         // if the activePlayer is 1 the textcontent shows
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
     } else {
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-        // reset otherplayer back to zero
-        roundScore = 0;
-        // if(activePlayer === 0) {
-        //     activePlayer = 1;
-        // } else {
-        //     activePlayer = 0;
-        // }
-
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-1').textContent = '0';
-
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
-
-        // document.querySelector('.player-0-panel').classList.remove('active');
-        // document.querySelector('player-1-penel').classList.add('active');
-
-        document.querySelector('.dice').style.display = 'none';
-
-    
+        nextPlayer();
     }
+
 });
 
 // 해당 function은 한번만 이용할 수 있음
@@ -89,10 +70,36 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     // update the UI(dom munipulation?)
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
     // check if player won the game
+    if (scores[activePlayer] >= 20) {
+        document.querySelector('#name-' + activePlayer).textContent= 'Winner!';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    } else {
     // next player
-    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-    roundScore = 0;
-
-    document.getElementById
+        nextPlayer();
+    }
 });
 
+function nextPlayer (){
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundScore = 0;
+            // reset otherplayer back to zero
+            // if(activePlayer === 0) {
+                //     activePlayer = 1;
+                // } else {
+                //     activePlayer = 0;
+                // }
+
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    document.querySeclector('.dice').style.display = 'none';
+}
+ 
+document.querySelector('btn-new').addEventListener('click', function() {
+    scores
+});
